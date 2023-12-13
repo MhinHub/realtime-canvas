@@ -7,7 +7,9 @@ import { ChromePicker } from "react-color";
 import { io } from "socket.io-client";
 import { drawLine } from "../utils/drawLine";
 const socket = io(
-  process.env.NEXT_PUBLIC_SERVER_URL ?? "http://localhost:3001"
+  process.env.NEXT_PUBLIC_SERVER_URL
+    ? `${process.env.NEXT_PUBLIC_SERVER_URL}`
+    : "http://localhost:3001"
 );
 
 interface pageProps {}
