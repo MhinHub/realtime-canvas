@@ -1,6 +1,7 @@
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
+const { instrument } = require("@socket.io/admin-ui");
 import { Server } from "socket.io";
 
 const app = express();
@@ -12,10 +13,15 @@ const io = new Server(server, {
     origin: [
       "http://localhost:3000",
       "https://realtime-canvas-mhinhub.vercel.app",
+      "https://admin.socket.io",
     ],
     methods: ["GET", "POST"],
     credentials: true,
   },
+});
+
+instrument(io, {
+  auth: false,
 });
 
 type Point = { x: number; y: number };
