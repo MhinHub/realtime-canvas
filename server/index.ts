@@ -24,25 +24,25 @@ instrument(io, {
   auth: false,
 });
 
-// type Point = { x: number; y: number };
+type Point = { x: number; y: number };
 
-// type DrawLine = {
-//   prevPoint: Point | null;
-//   currentPoint: Point;
-//   color: string;
-// };
+type DrawLine = {
+  prevPoint: Point | null;
+  currentPoint: Point;
+  color: string;
+};
 
-io.on("connection", (socket) => {
+io.on("connection", (socket: any) => {
   socket.on("client-ready", () => {
     socket.broadcast.emit("get-canvas-state");
   });
 
-  socket.on("canvas-state", (state) => {
+  socket.on("canvas-state", (state: any) => {
     console.log("received canvas state");
     socket.broadcast.emit("canvas-state-from-server", state);
   });
 
-  socket.on("draw-line", ({ prevPoint, currentPoint, color }) => {
+  socket.on("draw-line", ({ prevPoint, currentPoint, color }: DrawLine) => {
     socket.broadcast.emit("draw-line", { prevPoint, currentPoint, color });
   });
 
